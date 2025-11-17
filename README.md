@@ -10,7 +10,7 @@ Product data is fetched dynamically from FakeStoreAPI.
 Follow the steps below to run this project locally.
 
 1️⃣ Clone the repository
-git clone https://github.com/your-username/sembark-assignment.git
+git clone https://github.com/dee4i61/Sembark-assignment.git
 cd sembark-assignment
 
 2️⃣ Install dependencies
