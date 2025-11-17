@@ -20,6 +20,6 @@ describe("E-Commerce App - basic checks", () => {
 
   it("Opens Cart Page", () => {
     cy.visit("/cart");
-    cy.contains("My Cart");
+    cy.contains("Shopping Cart");
   });
 });

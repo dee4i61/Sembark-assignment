@@ -10,11 +10,19 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link
-            to="/"
-            className="text-xl font-semibold text-slate-900 tracking-tight hover:text-blue-600 transition-colors duration-200"
-          >
-            Sembark Store
-          </Link>
+          to="/"
+          aria-label="Go to Home page"
+          className="flex items-center gap-2 sm:gap-3"
+        >
+          <img
+            src="https://assets.sembark.com/images/logos/logo_512x512.png"
+            alt="Sembark Logo"
+            className="w-8 sm:w-10 md:w-10 object-contain"
+          />
+          <h2 className="text-xl font-semibold text-slate-900 tracking-tight hover:text-blue-600 transition-colors duration-200">
+            SEMBARK STORE
+          </h2>
+        </Link>
 
           <div className="flex items-center gap-8">
             <Link

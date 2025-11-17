@@ -1,16 +1,21 @@
-import React, {useState} from "react";
-import {X, Trash2} from "lucide-react";
-import type {CartItem as Item} from "../types/cart";
-import {useCart} from "../context/CartContext";
+import React, { useState } from "react";
+import { X, Trash2, Minus, Plus } from "lucide-react";
+import type { CartItem as Item } from "../types/cart";
+import { useCart } from "../context/CartContext";
 
 interface CartItemProps {
   item: Item;
 }
 
-const CartItem: React.FC<CartItemProps> = ({item}) => {
-  const {removeFromCart} = useCart();
-  const [quantity] = useState(item.quantity);
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
+  const { removeFromCart } = useCart();
+  const [quantity, setQuantity] = useState(item.quantity);
 
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity >= 1) {
+      setQuantity(newQuantity);
+    }
+  };
 
   return (
     <div className="group bg-white border border-sky-100 rounded-xl p-6 hover:shadow-md transition-all duration-200">
@@ -44,8 +49,29 @@ const CartItem: React.FC<CartItemProps> = ({item}) => {
             <div className="flex items-center gap-3">
               <span className="text-sm text-sky-600 font-medium">Price: ₹{item.price}</span>
             </div>
+            
             <div className="flex items-center gap-3">
-              <span className="text-sm text-sky-600 font-medium">Quantity: {quantity}</span>
+              <span className="text-sm text-sky-600 font-medium">Quantity:</span>
+              <div className="flex items-center border border-sky-200 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  className="px-3 py-1.5 hover:bg-sky-50 text-sky-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={quantity <= 1}
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+
+                <span className="px-4 py-1.5 text-sky-900 font-semibold min-w-[50px] text-center border-x border-sky-200">
+                  {quantity}
+                </span>
+
+                <button
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  className="px-3 py-1.5 hover:bg-sky-50 text-sky-700 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center gap-3">

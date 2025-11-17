@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
 
           <div>
-            <h3 className="text-lg font-semibold text-sky-900 mb-4">Sembark Store</h3>
+            <h3 className="text-lg font-semibold text-sky-900 mb-4">SEMBARK STORE</h3>
             <p className="text-sm text-sky-600 leading-relaxed">
               Your trusted destination for quality products at great prices.
               Shop with confidence.

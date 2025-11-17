@@ -20,11 +20,7 @@ const CartPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-sky-900 mb-3">
               Your Cart is Empty
             </h2>
-            <p className="text-sky-600 mb-8">
-              Looks like you haven't added anything to your cart yet. Start
-              shopping to fill it up!
-            </p>
-
+          
             <button
               onClick={() => navigate("/")}
               className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"

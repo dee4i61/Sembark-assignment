@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, ShoppingBag } from "lucide-react";
 import { getProductById } from "../services/productService";
 import type { Product } from "../types/product";
 import { useCart } from "../context/CartContext";
@@ -12,7 +12,10 @@ const ProductDetailPage: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { addToCart } = useCart();
+  const { addToCart, cart } = useCart();
+
+  // Check if product is in cart
+  const isInCart = cart.some((item) => item.id === product?.id);
 
   useEffect(() => {
     if (id) loadProduct(id);
@@ -45,7 +48,6 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="bg-white min-h-screen">
-
       <div className="bg-sky-50/50 border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-sky-600">
@@ -62,7 +64,6 @@ const ProductDetailPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
           <div className="space-y-4">
             <div className="bg-sky-50/50 rounded-2xl p-12 flex items-center justify-center">
               <img
@@ -74,7 +75,6 @@ const ProductDetailPage: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-
             <div>
               <span className="inline-block px-4 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-full">
                 {product.category}
@@ -124,22 +124,33 @@ const ProductDetailPage: React.FC = () => {
                 {product.description}
               </p>
             </div>
+
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button
-                onClick={() =>
-                  addToCart({
-                    id: product.id,
-                    title: product.title,
-                    price: product.price,
-                    image: product.image,
-                    quantity: 1,
-                  })
-                }
-                className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                <ShoppingCart className="w-5 h-5" />
-                Add to Cart
-              </button>
+              {isInCart ? (
+                <button
+                  onClick={() => navigate("/cart")}
+                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  <ShoppingBag className="w-5 h-5" />
+                  Go to Cart
+                </button>
+              ) : (
+                <button
+                  onClick={() =>
+                    addToCart({
+                      id: product.id,
+                      title: product.title,
+                      price: product.price,
+                      image: product.image,
+                      quantity: 1,
+                    })
+                  }
+                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
